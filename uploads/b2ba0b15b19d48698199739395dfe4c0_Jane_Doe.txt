@@ -1,0 +1,21 @@
+Jane Doe
+Marketing Analyst
+
+EXPERIENCE
+Marketing Analyst at RetailCo (2020-Present)
+- Analyzed customer data using Excel and basic SQL
+- Created monthly sales reports using Excel pivot tables
+- Collaborated with marketing team on campaign performance analysis
+- Used Tableau for basic dashboard creation
+
+Junior Analyst at DataFirst (2018-2020)
+- Collected and organized marketing data
+- Created simple charts and graphs in Excel
+- Assisted senior analysts with data entry and cleaning
+
+SKILLS
+Data Tools: Excel (advanced), Tableau (basic), SQL (basic)
+Other: Data analysis, Reporting, Statistics, Communication
+
+EDUCATION
+Bachelor of Arts in Business Administration, State College (2014-2018)
