@@ -1,0 +1,156 @@
+##Job Description (Weak Match Scenario)##
+----------------------------------------
+Senior Software Engineer - AI/ML
+
+We are looking for a Senior Software Engineer specializing in AI/ML systems.
+
+REQUIRED SKILLS
+- Python (advanced)
+- Machine Learning (TensorFlow, PyTorch, or scikit-learn)
+- Deep Learning (neural networks, CNNs, RNNs)
+- Cloud platforms (AWS, GCP, or Azure)
+- Docker and Kubernetes
+- REST API development
+
+PREFERRED SKILLS
+- Natural Language Processing (NLP)
+- Computer Vision
+- MLOps experience
+- Big data technologies (Spark, Hadoop)
+
+REQUIREMENTS
+- 5+ years of software development experience
+- 3+ years of machine learning/deep learning experience
+- Master's degree in Computer Science, AI, or related field
+- Experience with production ML systems
+- Strong knowledge of algorithms and data structures
+----------------------------------
+##Resume (Weak Match Scenario)##
+-----------------------------------
+Mohan
+Junior Web Developer
+
+EXPERIENCE
+Junior Web Developer at SmallStartup (2022-Present)
+- Built simple websites using HTML, CSS, and JavaScript
+- Maintained existing web applications
+- Fixed bugs and minor issues
+- Assisted senior developers with basic tasks
+
+Intern at TechCompany (2021-2022)
+- Learned basic web development
+- Helped with documentation
+- Participated in code reviews
+
+SKILLS
+Web Development: HTML, CSS, JavaScript (basic)
+Tools: Git (basic), VS Code
+Other: Problem-solving, Teamwork, Communication
+
+EDUCATION
+Associate Degree in Web Development, Community College (2019-2021)
+-----------------------------------------------------------------------------------------------------------
+Job Description (Moderate Match Scenario)
+---------------------------------------------
+Data Analyst
+ 
+We are seeking a Data Analyst to join our analytics team.
+ 
+REQUIRED SKILLS
+- Python (pandas, numpy)
+- SQL (PostgreSQL or MySQL)
+- Data visualization (Tableau or Power BI)
+- Excel (advanced functions, pivot tables)
+ 
+PREFERRED SKILLS
+- Machine learning basics
+- Dashboard development
+- Statistical analysis
+- Experience with large datasets
+ 
+REQUIREMENTS
+- 2+ years of data analysis experience
+- Bachelor's degree in Mathematics, Statistics, Computer Science, or related field
+- Strong analytical and problem-solving skills
+- Experience with data cleaning and preprocessing
+------------------------------------
+Resume (Moderate Match Scenario)
+------------------------------------
+Jane Doe
+Marketing Analyst
+ 
+EXPERIENCE
+Marketing Analyst at RetailCo (2020-Present)
+- Analyzed customer data using Excel and basic SQL
+- Created monthly sales reports using Excel pivot tables
+- Collaborated with marketing team on campaign performance analysis
+- Used Tableau for basic dashboard creation
+ 
+Junior Analyst at DataFirst (2018-2020)
+- Collected and organized marketing data
+- Created simple charts and graphs in Excel
+- Assisted senior analysts with data entry and cleaning
+ 
+SKILLS
+Data Tools: Excel (advanced), Tableau (basic), SQL (basic)
+Other: Data analysis, Reporting, Statistics, Communication
+ 
+EDUCATION
+Bachelor of Arts in Business Administration, State College (2014-2018)
+----------------------------------------------------------------------------------------------------------
+## Job Description (strong Match Scenario)##
+----------------------------------------------
+Senior Backend Engineer
+ 
+We are looking for a Senior Backend Engineer to lead our backend development team.
+ 
+REQUIRED SKILLS
+- Python (FastAPI, Django)
+- AWS (EC2, S3, Lambda)
+- Docker and Kubernetes
+- PostgreSQL and MongoDB
+- REST API development
+ 
+PREFERRED SKILLS
+- JavaScript/TypeScript
+- React or Node.js
+- CI/CD experience
+- Team leadership experience
+ 
+REQUIREMENTS
+- 5+ years of backend development experience
+- Bachelor's degree in Computer Science or related field
+- Experience with microservices architecture
+- Strong problem-solving skills
+
+---------------------------------------
+##Resume (strong Match Scenario)##
+--------------------------------------
+John Smith
+Senior Backend Engineer
+ 
+EXPERIENCE
+Senior Backend Engineer at TechCorp (2020-Present)
+- Led development of microservices architecture serving 1M+ users
+- Architected RESTful APIs using Python, FastAPI, and Django
+- Implemented CI/CD pipelines with GitHub Actions and Docker
+- Managed team of 5 developers, conducting code reviews and mentoring
+ 
+Backend Developer at StartupXYZ (2017-2020)
+- Developed scalable web applications using Python and Flask
+- Built database systems with PostgreSQL and MongoDB
+- Integrated AWS services (EC2, S3, Lambda) for cloud deployment
+- Implemented automated testing with pytest
+ 
+SKILLS
+Programming: Python, JavaScript, TypeScript, Java
+Frameworks: FastAPI, Django, Flask, React, Node.js
+Databases: PostgreSQL, MongoDB, MySQL, Redis
+Cloud: AWS (EC2, S3, Lambda, RDS), Docker, Kubernetes
+Tools: Git, GitHub Actions, Jenkins, Linux
+Other: REST APIs, Microservices, CI/CD
+ 
+EDUCATION
+Bachelor of Science in Computer Science, MIT (2013-2017)
+-----------------------------------------------------------------------------------------------------
+

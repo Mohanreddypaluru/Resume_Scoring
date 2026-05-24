@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Fit Scorer</title>
+    <style>
+        :root {
+            --ink: #18212f;
+            --muted: #667085;
+            --line: #d7dee8;
+            --panel: #ffffff;
+            --bg: #f5f7fb;
+            --green: #15803d;
+            --red: #b42318;
+            --blue: #155eef;
+            --amber: #b54708;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Inter, Segoe UI, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+        }
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--line);
+            padding: 24px 6vw 18px;
+        }
+        h1, h2, h3 { margin: 0; letter-spacing: 0; }
+        h1 { font-size: clamp(28px, 4vw, 46px); }
+        header p { max-width: 920px; color: var(--muted); line-height: 1.55; }
+        main { padding: 28px 6vw 56px; }
+        .grid {
+            display: grid;
+            grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+            gap: 22px;
+            align-items: start;
+        }
+        form, .panel {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        label {
+            display: block;
+            font-weight: 700;
+            margin: 0 0 8px;
+        }
+        input[type="file"], textarea {
+            width: 100%;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px;
+            background: #fff;
+            color: var(--ink);
+        }
+        textarea {
+            min-height: 260px;
+            resize: vertical;
+            line-height: 1.45;
+        }
+        button {
+            width: 100%;
+            border: 0;
+            border-radius: 6px;
+            padding: 13px 16px;
+            background: var(--blue);
+            color: #fff;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .field { margin-bottom: 18px; }
+        .error {
+            border: 1px solid #fecdca;
+            background: #fff2f1;
+            color: var(--red);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+        .score-row {
+            display: grid;
+            grid-template-columns: 180px minmax(0, 1fr);
+            gap: 18px;
+        }
+        .score {
+            display: grid;
+            place-items: center;
+            aspect-ratio: 1;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background: #f8fbff;
+        }
+        .score strong { font-size: clamp(38px, 6vw, 64px); }
+        .score span { color: var(--muted); font-weight: 700; }
+        .bars { display: grid; gap: 10px; }
+        .bar-label {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+        .bar {
+            height: 10px;
+            background: #e8edf5;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .bar div { height: 100%; background: var(--blue); }
+        .sections {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+        ul { padding-left: 20px; }
+        li { margin: 8px 0; line-height: 1.45; }
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            min-height: 28px;
+            margin: 4px 4px 4px 0;
+            border-radius: 999px;
+            padding: 4px 10px;
+            background: #eef4ff;
+            color: #1849a9;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .tag.missing { background: #fff1f3; color: var(--red); }
+        .tag.extra { background: #ecfdf3; color: var(--green); }
+        details {
+            border-top: 1px solid var(--line);
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        summary { cursor: pointer; font-weight: 800; }
+        pre {
+            white-space: pre-wrap;
+            overflow: auto;
+            background: #0f172a;
+            color: #e5e7eb;
+            border-radius: 6px;
+            padding: 14px;
+            font-size: 12px;
+        }
+        @media (max-width: 920px) {
+            .grid, .sections, .score-row { grid-template-columns: 1fr; }
+            .score { aspect-ratio: auto; padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Resume Fit Scorer</h1>
+        <p>Upload a resume and paste a job description to get a 0-100 fit score with evidence, gaps, partial matches, suggestions, and uncertainty notes. The scorer combines deterministic parsing and rule weights with non-LLM TF-IDF semantic similarity.</p>
+    </header>
+
+    <main class="grid">
+        <form action="/analyze" method="POST" enctype="multipart/form-data">
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+            <div class="field">
+                <label for="resume">Resume file</label>
+                <input id="resume" type="file" name="resume" accept=".pdf,.txt" required>
+            </div>
+            <div class="field">
+                <label for="jd">Job description</label>
+                <textarea id="jd" name="jd" required placeholder="Paste the target role description here">{{ jd or "" }}</textarea>
+            </div>
+            <button type="submit">Analyze Fit</button>
+        </form>
+
+        <section>
+            {% if result %}
+                <div class="panel">
+                    <div class="score-row">
+                        <div class="score">
+                            <div>
+                                <strong>{{ result.score }}</strong>
+                                <span>/ 100</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h2>{{ result.evaluation }}</h2>
+                            <p style="color: var(--muted); line-height: 1.55;">Weights: skills 40%, responsibilities 20%, experience 15%, education 10%, semantic similarity 15%. A small penalty is applied for short, noisy, or adversarial-looking input.</p>
+                            <div class="bars">
+                                {% for key, value in result.category_scores.items() %}
+                                    <div>
+                                        <div class="bar-label"><span>{{ key.replace("_", " ").title() }}</span><strong>{{ value }}</strong></div>
+                                        <div class="bar"><div style="width: {{ value }}%;"></div></div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sections">
+                    <div class="panel">
+                        <h3>Matched Skills</h3>
+                        {% for item in result.matched_skills %}
+                            <span class="tag">{{ item.skill }}</span>
+                            {% if item.evidence %}
+                                <ul>
+                                    {% for line in item.evidence[:1] %}
+                                        <li>{{ line }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% else %}
+                            <p>No direct required skill matches found.</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="panel">
+                        <h3>Important Gaps</h3>
+                        {% for skill in result.missing_skills %}
+                            <span class="tag missing">{{ skill }}</span>
+                        {% else %}
+                            <p>No required skill gaps detected.</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="panel">
+                        <h3>Partial Matches</h3>
+                        <ul>
+                            {% for item in result.partial_matches %}
+                                <li>{{ item.area }}: resume has {{ item.resume_evidence }}, JD asks for {{ item.jd_need }}.</li>
+                            {% else %}
+                                <li>No adjacent-skill partial matches detected.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Suggestions</h3>
+                        <ul>
+                            {% for suggestion in result.suggestions %}
+                                <li>{{ suggestion }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Uncertainty</h3>
+                        <ul>
+                            {% for item in result.uncertainty %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Extra Resume Skills</h3>
+                        {% for skill in result.extra_resume_skills %}
+                            <span class="tag extra">{{ skill }}</span>
+                        {% else %}
+                            <p>No extra known skills detected.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="panel" style="margin-top: 18px;">
+                    <details>
+                        <summary>Structured parsed schema</summary>
+                        <pre>{{ result.parsed_resume }}</pre>
+                        <pre>{{ result.parsed_jd }}</pre>
+                    </details>
+                </div>
+            {% else %}
+                <div class="panel">
+                    <h2>Ready to score</h2>
+                    <p style="color: var(--muted); line-height: 1.55;">The app is intentionally multi-component: one component extracts text, one parses resume/JD into schema fields, one performs deterministic evidence and warning checks, and one computes weighted scores using rules plus TF-IDF similarity.</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
